@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.item-nav{
+    transition: all 200ms ;
+}
