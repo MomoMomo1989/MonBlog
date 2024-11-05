@@ -5,3 +5,60 @@
 .item-nav{
     transition: all 200ms ;
 }
+.sous-menu{
+    background: #ebebeb;
+    position: absolute;
+    width:105px;
+    top: 40px;
+    color: #202020;
+}
+.sous-menu li {
+    padding: 5px;
+    border-bottom: 1px solid #202020;
+}
+.sous-menu li:hover {
+    cursor: pointer;
+    color: #e87316;
+    border-bottom: 1px solid #e87316;
+}
+.menu2{
+    transition: all 0.3s ease-out;   
+}
+.menu1:hover ul.sous-menu{
+    display: block;
+}
+.search {
+    border: 1px solid #919191;
+    transition: width 1.5s ease-out; 
+    width: 0px; 
+    height: 0px;
+    overflow: hidden; 
+    outline: none;
+}
+
+.actesea {
+    width: 80%; 
+    height: 40px;
+}
+.tog-prof-1 {
+    opacity: 0;             /* Rendre invisible */
+    transform: translateY(10px); /* Décalage pour l’animation */
+    transition: opacity 0.3s ease, transform 0.3s ease; /* Transition pour l'animation */
+    pointer-events: none;    /* Empêche les interactions tant que le menu est caché */
+}
+
+/* Menu visible avec animation */
+.tog-prof:hover .tog-prof-1 {
+    opacity: 1;              /* Apparition */
+    transform: translateY(0); /* Alignement à sa position d’origine */
+    pointer-events: auto;    /* Réactiver les interactions */
+}
+
+/* Transition de couleur des éléments de menu */
+.tog-prof-2 {
+    transition: color 0.3s ease-out;
+}
+
+.tog-prof-2:hover {
+    color: #e87316;
+}
