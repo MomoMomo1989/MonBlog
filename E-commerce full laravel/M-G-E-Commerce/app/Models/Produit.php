@@ -14,4 +14,9 @@ class Produit extends Model
             'product_pics',
             'product_qte_stock',
     ];
+    public function user(){
+        return $this->belongsToMany(user::class,'order')
+               ->withPivot('quantity','unity','price_ht','price_ttc','tax','delivered')
+               ->withTimestemps();
+    }
 }

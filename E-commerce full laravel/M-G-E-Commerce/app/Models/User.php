@@ -22,7 +22,11 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    public function produit(){
+        return $this->belongsToMany(produit::class,'order')
+               ->withPivot('quantity','unity','price_ht','price_ttc','tax','delivered')
+               ->withTimestemps();
+    }
     /**
      * The attributes that should be hidden for serialization.
      *
