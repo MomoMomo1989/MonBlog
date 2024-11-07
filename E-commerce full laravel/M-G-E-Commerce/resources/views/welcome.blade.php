@@ -21,11 +21,12 @@
         @livewireStyles
     </head>
     <body class="font-sans antialiased w-[100vw] h-auto ">
+        
         <livewire:navigation />
         <livewire:carousel /> 
 
 
-
+        
         @livewireScripts
     </body>
 </html>

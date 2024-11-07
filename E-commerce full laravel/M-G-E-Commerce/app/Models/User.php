@@ -21,6 +21,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'isAdmin',
+        'telephone',
     ];
     public function produit(){
         return $this->belongsToMany(produit::class,'order')
