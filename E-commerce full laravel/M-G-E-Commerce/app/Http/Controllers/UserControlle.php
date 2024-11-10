@@ -48,7 +48,13 @@ class UserControlle extends Controller
             'password' => 'required|string|min:8',
         ]);
           if (Auth::attempt($authentification)) {
-            return redirect()->route('home')->with('success','Vous etes connecter');
+              $user = auth::user();
+              if ($user->isAdmin){
+                return redirect()->route('home')->with('success','Vous etes connecter');
+              }else {
+                return redirect()->route('adminHome')->with('success','Vous etes connecter');
+              }
+            
           } else {
             return back()->withErrors([
                 'email' => 'Les identifiants sont incorrects.',

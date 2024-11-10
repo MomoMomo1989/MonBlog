@@ -1,7 +1,9 @@
 @extends('layout.layoutClient')
 @section('main')
-<div id="flash-message" class=" text-[#30ff42] text-[80px] flex items-center justify-center p-4 rounded mb-4">
-    {{ session('success') }}
+<div id="flash-message" class=" w-full h-[40px] flex justify-center items-center ">
+    <div class="text-[#252424] bg-[#dcf5bf] text-[25px] flex items-center justify-center rounded-[10px] p-4 ">
+        {{ session('success') }}
+    </div>
 </div>
 <form action="{{ route('storeLogin') }}" method="POST" class="h-[auto] w-[100%] flex flex-col justify-center items-center">
    @csrf
@@ -15,7 +17,7 @@
          @error('email')
          <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
          @enderror   
-    </div>
+       </div>
        <div class="relative flex flex-col">
         <label for="" class="absolute top-[-12px] left-4 bg-white px-1 ">Password</label>
         <input type="password" name="password" id="" class="outline-none pl-[16px] h-[47px] w-[500px] border-[2px] border-[#5e5e5e] bg-transparent ">

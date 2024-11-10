@@ -13,3 +13,4 @@ Route::get('/login',[UserControlle::class, 'showLogin'])->name('Login');
 Route::post('store_Login',[UserControlle::class, 'storeLogin'])->name('storeLogin');
 Route::get('/Home',[UserControlle::class,'home'])->name('home');
 Route::post('LogOut',[UserControlle::class,'logOut'])->name('LogOut');
+Route::get('admin',[AdminController::class,'adminHome'])->name('adminHome');

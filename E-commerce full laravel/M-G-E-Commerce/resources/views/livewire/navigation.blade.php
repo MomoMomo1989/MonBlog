@@ -56,7 +56,13 @@
                 <img src="images/nav/panier.png" alt="" class="h-[25px] w-[25px]  ">
             </div>
         </div>
-        <livewire:profil-user />
+        @guest
+        <livewire:profil-guest />  
+        @endguest
+        @auth
+        <livewire:profil-user />   
+        @endauth
+        
     </div>
     @endif
    </div>
