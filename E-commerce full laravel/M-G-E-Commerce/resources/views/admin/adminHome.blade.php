@@ -1,4 +1,4 @@
-@extends('layoutAdmin')
+@extends('layout.layoutAdmin')
 @section('main')
-    bonjour
+    
 @endsection

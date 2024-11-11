@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserControlle;
-
+use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');

@@ -50,9 +50,9 @@ class UserControlle extends Controller
           if (Auth::attempt($authentification)) {
               $user = auth::user();
               if ($user->isAdmin){
-                return redirect()->route('home')->with('success','Vous etes connecter');
-              }else {
                 return redirect()->route('adminHome')->with('success','Vous etes connecter');
+              }else {
+                return redirect()->route('home')->with('success','Vous etes connecter');
               }
             
           } else {

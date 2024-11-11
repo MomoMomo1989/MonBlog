@@ -78,3 +78,17 @@
     transform: translateY(0); /* Alignement à sa position d’origine */
     pointer-events: auto; 
 }
+.menu-lateral{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: width 0.6s ease-out;
+    overflow: hidden;
+}
+.meni-width{
+width: 0px;
+}
+.meni-width2{
+    width: 350px;
+}
+.nav-adm{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 12px; 
+}

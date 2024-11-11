@@ -8,11 +8,12 @@
     <title></title>
     @livewireStyles
 </head>
-<body >
-    <div class="flex w-full h-auto ">
-        <livewire:menu-lateral-admin/>
-        <main>
-          <livewire:nav-admin/>
+<body class="m-0 p-0 top-0 right-0 ">
+    <div class="flex w-full h-auto  ">
+        <livewire:admin.menu-lateral-admin/>       
+        <main class="w-full   ">
+          <livewire:admin.nav-admin/>
+          <x-content-main-admin />
           @yield('main')
     </main>
     </div>

@@ -1,3 +1,4 @@
-<div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
+<div class="nav-adm h-[73px] w-[100%] flex justify-between items-center pl-4 pr-4  ">
+    <livewire:admin-search />
+    <livewire:admin-profil-nav />
 </div>
