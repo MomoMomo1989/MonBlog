@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="menu">
+        <ul>
+            <li class="menu-item">
+                <div class="menu-title" onclick="toggleMenu('menu1')">Product</div>
+                <ul id="menu1" class="submenu">
+                    <li><button>Add Product</button></li>
+                    <li><button>Product List</button></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <div class="menu-title" onclick="toggleMenu('menu2')">Brand</div>
+                <ul id="menu2" class="submenu">
+                    <li><button>Add Brand</button></li>
+                    <li><button>Brand List</button></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <div class="menu-title" onclick="toggleMenu('menu3')">Category</div>
+                <ul id="menu3" class="submenu">
+                    <li><button>Add Category</button></li>
+                    <li><button>Category List</button></li>
+                </ul>
+            </li>
+            <li class="menu-item">
+                <div class="menu-title" onclick="toggleMenu('menu4')">Order</div>
+                <ul id="menu4" class="submenu">
+                    <li><button>Add Order</button></li>
+                    <li><button>Order List</button></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>

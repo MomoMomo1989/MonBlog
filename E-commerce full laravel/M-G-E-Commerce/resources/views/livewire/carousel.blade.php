@@ -30,5 +30,4 @@
     <div class="h-[100vh] w-[100vw] absolute top-0 left-0 z-0 ">
         <img src="images/carousel/back.jpg" alt="">
     </div>
-
 </div>
