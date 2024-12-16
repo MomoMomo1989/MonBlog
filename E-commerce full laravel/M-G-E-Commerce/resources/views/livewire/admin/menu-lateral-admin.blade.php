@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="">
-             <ul class="">
+             {{-- <ul class="">
                 <li class="flex h-auto  ml-[2px]" id="li-1">
                     <div class=" "></div>
                     <div class="pl-3 ">
@@ -75,8 +75,118 @@
                     </div>
                 </li>
                 
-            </ul>
-        </div> 
+            </ul> --}}
+        <ul x-data="{ active: null,
+        toggle(item){
+        if(this.isActive(item)){
+        this.active = null
+        return
+        }
+        this.active = item;
+        },
+        isActive(item){
+        return this.active === item
+        }
+        }">
+            <li class="flex h-auto  ml-[2px]" @click = "toggle('li1')" >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                        <img src="images/admin/down.png" alt="" class="w-[18px] h-[18px] cursor-pointe absolute right-[4px]  ">
+                    </div>
+                    <ul class="pl-12 list-disc transition-[height] duration-600 ease-in-out  " 
+                        x-show = "isActive('li1')"
+                        x-transition.duration.500ms >
+                        <li><button>Add product</button></li>
+                        <li><button>products</button></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]" @click = "toggle('li2')" >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                        <img src="images/admin/down.png" alt="" class="w-[18px] h-[18px] cursor-pointe absolute right-[4px]  ">
+                    </div>
+                    <ul class="pl-12 list-disc " x-show="isActive('li2')" x-transition.duration.500ms>
+                        <li><button>Add product</button></li>
+                        <li><button>products</button></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]" @click = "toggle('li3')">
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                        <img src="images/admin/down.png" alt="" class="w-[18px] h-[18px] cursor-pointe absolute right-[4px]  ">
+                    </div>
+                    <ul class="pl-12 list-disc " x-show="isActive('li3')" x-transition.duration.500ms >
+                        <li><button>Add product</button></li>
+                        <li><button>products</button></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]" @click = "toggle('li4')" >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                        <img src="images/admin/down.png" alt="" class="w-[18px] h-[18px] cursor-pointe absolute right-[4px]  ">
+                    </div>
+                    <ul class="pl-12 list-disc transition-[height] duration-600 ease-in-out  " 
+                        x-show = "isActive('li4')"
+                        x-transition.duration.500ms >
+                        <li><button>Add product</button></li>
+                        <li><button>products</button></li>
+                    </ul>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]"  >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                    </div>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]"  >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                    </div>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]" >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                    </div>
+                </div>
+            </li>
+            <li class="flex h-auto  ml-[2px]" >
+                <div class=" "></div>
+                <div class="pl-3 ">
+                    <div class="flex justify-start items-center cursor-pointer mb-1 menu-opt-1 pr-1 relative  w-[246px]  ">
+                        <img src="images/admin/panier.png" alt="" class="w-[18px] h-[18px] mr-3">
+                        <button class="mr-[120px] ">products</button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+    </div> 
     </div>
 
 </div>

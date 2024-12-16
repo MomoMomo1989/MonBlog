@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title></title>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
     @livewireStyles
 </head>
 <body class="m-0 p-0 top-0 right-0 ">
@@ -15,7 +16,7 @@
           <livewire:admin.nav-admin/>
           <x-content-main-admin />
           @yield('main')
-    </main>
+        </main>
     </div>
     @livewireScripts
 </body>
