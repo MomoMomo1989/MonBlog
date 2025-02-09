@@ -1,4 +1,4 @@
-<x-app-layout>
+
     <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
         <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
           <div class="flex items-center justify-between gap-8 mb-8">
@@ -10,6 +10,7 @@
               <p class="block mt-1 font-sans text-base antialiased font-normal leading-relaxed text-gray-700">
                 Information
               </p>
+              
             </div>
             <div class="w-full max-w-sm min-w-[200px]">
                 <div class="relative flex items-center">
@@ -17,12 +18,12 @@
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                   </svg>
                
-                  <input wire:model='search'
+                  <input wire:model='search' wire:keydown.enter='searchBrands'
                   class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
                   placeholder="Votre recherche ici..." 
                   />
                   
-                  <button wire:click="searchBrands" type="submit"
+                  <button wire:click="searchBrands" type="button"
                     class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
                     type="button"
                   >
@@ -153,5 +154,5 @@
         </div>
         
       </div> 
-</x-app-layout>
+
 

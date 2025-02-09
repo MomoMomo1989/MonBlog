@@ -1,11 +1,13 @@
+
 <x-app-layout>
-         @if (session('success'))
+  @if (session('success'))
                <div class="text-gray-800 bg-green-300 flex justify-center items-center  ">
                {{ session('success') }}
                </div>
-         @endif
-    <div class=" pb-2 relative flex flex-col w-full h-[99%] text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
-        <div class="flex items-center justify-between gap-8 border-b-[1px] p-3 h-[80px] ">
+         @endif 
+  <div class=" pb-2 relative flex flex-col w-full h-[99%] text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
+       
+  <div class="flex items-center justify-between gap-8 border-b-[1px] p-3 h-[80px] ">
             <div>
               <h5
                 class="block font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">
@@ -141,6 +143,6 @@
 
           
         </div>
-      </div> 
-
+</div> 
 </x-app-layout>
+

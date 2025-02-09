@@ -11,21 +11,15 @@ class ListeMarque extends Component
     public $search;
     public function render()
     {
-        $brands = brand::all();
+        $brands = Brand::where('nom', 'like', '%' . $this->search . '%')->get();
         return view('livewire.liste-marque',[
             'brands' => $brands ,
         ]);
     }
     public function searchBrands()
     {
-        dd($this->search);
         // Récupérer les marques filtrées
         $brands = Brand::where('nom', 'like', '%' . $this->search . '%')->get();
-
-        // Retourner les résultats
-        return view('livewire.liste-marque',[
-            'brands' => $brands ,
-        ]);
     }
 
     public function show()

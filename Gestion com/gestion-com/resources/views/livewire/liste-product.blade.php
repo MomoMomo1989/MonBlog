@@ -1,4 +1,4 @@
-<x-app-layout>
+
     <div class="relative flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border">
         <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
           <div class="flex items-center justify-between gap-8 mb-8">
@@ -17,14 +17,14 @@
                     <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
                   </svg>
                
-                  <input
+                  <input wire:model='search' wire:keydown.enter="searchProduct"
                   class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
                   placeholder="Votre recherche ici..." 
                   />
                   
-                  <button
+                  <button wire:click='searchProduct' 
                     class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
-                    type="button"
+                    type="submit"
                   >
                     Search
                   </button> 
@@ -51,32 +51,7 @@
           
           <div class="flex flex-col items-center justify-between gap-4 md:flex-row">
             <div class="block w-full overflow-hidden md:w-max">
-              {{-- <nav>
-                <ul role="tablist" class="relative flex flex-row p-1 rounded-lg bg-blue-gray-50 bg-opacity-60">
-                  <li role="tab"
-                    class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                    data-value="all">
-                    <div class="z-20 text-inherit">
-                      &nbsp;&nbsp;All&nbsp;&nbsp;
-                    </div>
-                    <div class="absolute inset-0 z-10 h-full bg-white rounded-md shadow"></div>
-                  </li>
-                  <li role="tab"
-                    class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                    data-value="monitored">
-                    <div class="z-20 text-inherit">
-                      &nbsp;&nbsp;Monitored&nbsp;&nbsp;
-                    </div>
-                  </li>
-                  <li role="tab"
-                    class="relative flex items-center justify-center w-full h-full px-2 py-1 font-sans text-base antialiased font-normal leading-relaxed text-center bg-transparent cursor-pointer select-none text-blue-gray-900"
-                    data-value="unmonitored">
-                    <div class="z-20 text-inherit">
-                      &nbsp;&nbsp;Unmonitored&nbsp;&nbsp;
-                    </div>
-                  </li>
-                </ul>
-              </nav> --}}
+              
             </div> 
           </div>
         </div>
@@ -142,6 +117,7 @@
             </thead>
             <tbody>
 
+              @foreach ($produit as $item)
               <tr>
                 <td class="p-4 border-b border-blue-gray-50">
                   <div class="flex items-center gap-3">
@@ -149,7 +125,7 @@
                       alt="John Michael" class="relative inline-block h-8 w-8  object-cover object-center" />
                     <div class="flex flex-col">
                       <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                        John Michael
+                        {{ $item->nom }}
                       </p>
                       <p
                         class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
@@ -161,11 +137,11 @@
                 <td class="p-4 border-b border-blue-gray-50">
                   <div class="flex flex-col">
                     <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                      Manager
+                      {{ $item->prix_achat }}
                     </p>
                     <p
                       class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
-                      Organization
+                      {{ $item->prix_vente }}
                     </p>
                   </div>
                 </td>
@@ -173,13 +149,13 @@
                   <div class="w-max">
                     <div
                       class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                      <span class="">On Stock</span>
+                      <span class="">{{ $item->quantite_stock }}</span>
                     </div>
                   </div>
                 </td>
                 <td class="p-4 border-b border-blue-gray-50">
                   <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                    23/04/18
+                    {{ $item->categorie->nom }} / {{ $item->brand->nom }}
                   </p>
                 </td>
                 <td class="p-2 w-[100px] border-b border-blue-gray-50">
@@ -207,6 +183,7 @@
                   </button>
                 </td>
               </tr>
+              @endforeach
               
             </tbody>
           </table>
@@ -229,4 +206,4 @@
           </div>
         </div>
       </div> 
-</x-app-layout>
+
