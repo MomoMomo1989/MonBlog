@@ -158,9 +158,9 @@
                     {{ $item->categorie->nom }} / {{ $item->brand->nom }}
                   </p>
                 </td>
-                <td class="p-2 w-[100px] border-b border-blue-gray-50">
-                  
-                  <button
+                <td class="p-2 w-[100px] border-b border-blue-gray-50 " x-data="{modalIsOpen: false}" >
+                  <x-modal.update-prodacts id="{{ $item->id }}" />
+                  <button @click="modalIsOpen= true"
                     class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="button">
                     <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
@@ -172,15 +172,17 @@
                       </svg>
                     </span>
                   </button>
-                  <button
+                  
+                  <button onsubmit="return confirmDelete()"
                     class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                    type="button">
+                    type="submit">
                     <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
                         <svg fill="#000000" class="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path d="M5.755,20.283,4,8H20L18.245,20.283A2,2,0,0,1,16.265,22H7.735A2,2,0,0,1,5.755,20.283ZM21,4H16V3a1,1,0,0,0-1-1H9A1,1,0,0,0,8,3V4H3A1,1,0,0,0,3,6H21a1,1,0,0,0,0-2Z"/>
                         </svg>
                     </span>
                   </button>
+                
                 </td>
               </tr>
               @endforeach

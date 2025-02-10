@@ -15,6 +15,7 @@ class ListeProduct extends Component
     public function render()
     {
         $produit = produit::where('nom', 'like', '%' . $this->search . '%')
+        ->orWhere('barcode', 'like', '%' . $this->search . '%')
         ->orderBy('id','desc')
         ->with('categorie')
         ->with('brand')
@@ -28,6 +29,7 @@ class ListeProduct extends Component
     {
         // dd($this->search);
         $produit = produit::where('nom', 'like', '%' . $this->search . '%')
+        ->orWhere('barcode', 'like', '%' . $this->search . '%')
         ->orderBy('id','desc')
         ->with('categorie')
         ->with('brand')
@@ -82,5 +84,8 @@ class ListeProduct extends Component
                 'categories'=>$categories,
                 'produit'=>$produit,
             ]);
+    }
+    public function delete(){
+
     }
 }

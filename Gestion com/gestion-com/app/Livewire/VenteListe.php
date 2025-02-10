@@ -8,6 +8,9 @@ class VenteListe extends Component
 {
     public function render()
     {
-        return view('livewire.vente-liste');
+        // $vente = vente::where()
+        return view('livewire.vente-liste',[
+            
+        ]);
     }
 }

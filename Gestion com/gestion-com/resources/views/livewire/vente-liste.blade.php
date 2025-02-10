@@ -47,6 +47,126 @@
       </div>
     </div>
     <div class="p-6 px-0 overflow-scroll">
-      
+      <table class="w-full mt-4 text-left table-auto min-w-max">
+        <thead>
+          <tr>
+            <th
+              class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
+              <p
+                class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                N° Facture(vente)
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+              </p>
+            </th>
+            <th
+              class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
+              <p
+                class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                Nbre Articles
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+              </p>
+            </th>
+            <th
+              class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
+              <p
+                class="flex items-center justify-between gap-2 font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+                Total
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                  stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+              </p>
+            </th>
+            <th
+              class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
+              <p
+                class="flex items-center justify-center  gap-2 font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70">
+              Action</p>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+
+          {{-- @foreach ($produit as $item)
+          <tr>
+            <td class="p-4 border-b border-blue-gray-50">
+              <div class="flex items-center gap-3">
+                <img src="{{ asset('images/materiel-informatique.png') }}"
+                  alt="John Michael" class="relative inline-block h-8 w-8  object-cover object-center" />
+                <div class="flex flex-col">
+                  <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                    {{ $item->nom }}
+                  </p>
+                  <p
+                    class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                    john@creative-tim.com
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+              <div class="flex flex-col">
+                <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                  {{ $item->prix_achat }}
+                </p>
+                <p
+                  class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
+                  {{ $item->prix_vente }}
+                </p>
+              </div>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+              <div class="w-max">
+                <div
+                  class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
+                  <span class="">{{ $item->quantite_stock }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+              <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+                {{ $item->categorie->nom }} / {{ $item->brand->nom }}
+              </p>
+            </td>
+            <td class="p-2 w-[100px] border-b border-blue-gray-50 " x-data="{modalIsOpen: false}" >
+              <x-modal.update-prodacts id="{{ $item->id }}" />
+              <button @click="modalIsOpen= true"
+                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="button">
+                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+                    class="w-4 h-4">
+                    <path
+                      d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z">
+                    </path>
+                  </svg>
+                </span>
+              </button>
+              
+              <button onsubmit="return confirmDelete()"
+                class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                type="submit">
+                <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                    <svg fill="#000000" class="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5.755,20.283,4,8H20L18.245,20.283A2,2,0,0,1,16.265,22H7.735A2,2,0,0,1,5.755,20.283ZM21,4H16V3a1,1,0,0,0-1-1H9A1,1,0,0,0,8,3V4H3A1,1,0,0,0,3,6H21a1,1,0,0,0,0-2Z"/>
+                    </svg>
+                </span>
+              </button>
+            
+            </td>
+          </tr>
+          @endforeach --}}
+          
+        </tbody>
+      </table>
     </div>
   </div> 

@@ -23,7 +23,8 @@ Route::middleware([
     route::get('Produit-Liste',[generalController::class,'ListeRenderProduct'])->name('product.show');
     route::get('Show-Add-Produit',[ListeProduct::class,'show'])->name('product.show.Add');
     route::post('Add-Produit',[ListeProduct::class,'store'])->name('product.store');
-
+    route::post('delete-Produit',[ListeProduct::class,'delete'])->name('produit.supprime');
+    
     // Marque
     route::get('Marque-Liste',[generalController::class,'ListeRenderMarque'])->name('Marque.show');
     route::get('Show-Add-Marque',[ListeMarque::class,'show'])->name('Marque.show.Add');
