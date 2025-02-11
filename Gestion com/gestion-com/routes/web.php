@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\ListeProduct;
 use App\Livewire\ListeMarque;
 use App\Livewire\ListeCategorie;
+use App\Livewire\VenteListe;
 use App\Http\Controllers\generalController;
 
 Route::get('/', function () {
@@ -37,5 +38,7 @@ Route::middleware([
 
     // vente
     route::get('vente',[generalController::class,'showVente'])->name('vente.show');
+    route::get('store',[VenteListe::class,'StoreVente'])->name('vente.show.Add');
 
+    
 });

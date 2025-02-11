@@ -25,4 +25,7 @@ class produit extends Model
     public function brand() {
         return $this->belongsTo(Brand::class);
     }
+    public function DetailFacture() {
+        return $this->hasMany(DetailFacture::class);
+    }
 }
