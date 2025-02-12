@@ -1,5 +1,15 @@
 <div class=" flex flex-col w-full h-full text-gray-700 bg-white shadow-md rounded-xl bg-clip-border pl-4 pr-4 ">
-    <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
+  @if (session('success'))
+               <div class="text-gray-800 bg-green-300 flex justify-center items-center  ">
+                     {{ session('success') }}
+               </div>
+  @endif 
+  @if($erreur)
+                  <div id="messageErreur" class="mt-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded-md">
+               {{ $erreur }}
+                  </div>
+            @endif  
+  <div class="relative mx-4 mt-4 overflow-hidden text-gray-700 bg-white rounded-none bg-clip-border">
       <div class="flex items-center justify-between gap-8 mb-8">
         <div>
           <h5
@@ -12,10 +22,9 @@
         </div>
         <div class="relative flex justify-center items-center">
             <label for="" class="mr-2  ">Client</label>
-            <input wire:model='search' wire:keydown.enter="searchProduct"
-            class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md pl-10 pr-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-            placeholder="Nom du client" 
-            />
+            <select class="w-[300px] h-[40px] bg-transparent text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow">
+              <option value="1"></option>
+          </select>
        
         </div>
         <div class="flex flex-col gap-2 shrink-0 sm:flex-row">
@@ -31,25 +40,25 @@
       </div>
     </div>
     <div class=" grid  grid-cols-2 w-[100%] h-auto  p-4  ">
-        <div class="w-[50%]">
-            <div class="w-full max-w-sm min-w-[200px] mb-4 m-3">
+        <div class="w-[100%]">
+            <div class="w-full max-w-sm min-w-[400px] mb-4">
                 <label class="block mb-2 text-sm text-slate-600">Code Bar</label>
-                <input type="text" name="barcode" id="barcode"
+                <input type="text" name="barcode" id="barcode" wire:model="codeBar"
                     class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm 
                     border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease 
                     focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
                     placeholder="Scanner ici..." autofocus />
             </div>
-            <div class="max-w-sm min-w-[300px] w-full mb-4">
+            <div class="max-w-sm min-w-[400px] w-full mb-4">
                 <label class="block mb-2 text-sm text-slate-600">Quantité</label>
-                <input type="number" name="barcode" id="barcode"
+                <input type="number" name="Quantite" id="" wire:model="qte" 
                     class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm 
                     border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease 
                     focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                    placeholder="Scanner ici..."  />
+                    placeholder=""  />
             </div>
-            <div class="min-w-[400px] w-full flex justify-center  ">
-                <button wire:click='searchProduct' 
+            <div class="w-[400px]  flex justify-end  ">
+                <button wire:click="recuperProduit" 
                   class="rounded-md bg-slate-800 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none ml-2"
                   type="submit"
                 >
@@ -57,21 +66,22 @@
                 </button> 
             </div>
         </div>
-        <div class="w-[50%] flex items-center h-full">
-            <div class=" w-full mb-4">
-                <input type="number" name="barcode" id="barcode" value="0"
-                    class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm 
+        <div class="w-[100%] flex items-center h-full">
+            <div class="relative w-full h-full mb-4 flex justify-center items-center ">
+                <input wire:model='totleTTC' disabled type="number" name="barcode" id="barcode" value="0" 
+                    class=" calculInput w-full h-[150px] mb-[20px] bg-transparent placeholder:text-slate-400 text-slate-700 
                     border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease 
                     focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
-                    placeholder="Scanner ici..."  />
+                    placeholder=""  />
+                    <span class="absolute bottom-[30px] right-2 font-bold   text-[25px] ">DA</span>
             </div>
         </div> 
         
      </div>
      
   <div class="p-6 px-0 overflow-scroll">
-    <table class="w-full mt-4 text-left table-auto min-w-max">
-      <thead>
+    <table class="w-full text-left table-auto min-w-max">
+      <thead class="bg-gray-200  ">
         <tr>
           <th
             class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
@@ -131,7 +141,7 @@
       </thead>
       <tbody>
 
-        {{-- @foreach ($produit as $item)
+        @foreach ($produitStock as $item)
         <tr>
           <td class="p-4 border-b border-blue-gray-50">
             <div class="flex items-center gap-3">
@@ -139,7 +149,7 @@
                 alt="John Michael" class="relative inline-block h-8 w-8  object-cover object-center" />
               <div class="flex flex-col">
                 <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                  {{ $item->nom }}
+                  {{ $item['nom'] }}
                 </p>
                 <p
                   class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
@@ -151,11 +161,11 @@
           <td class="p-4 border-b border-blue-gray-50">
             <div class="flex flex-col">
               <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                {{ $item->prix_achat }}
+                {{ $item['prix_vente'] }}
               </p>
               <p
                 class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
-                {{ $item->prix_vente }}
+                {{ $item['prix_vente'] }}
               </p>
             </div>
           </td>
@@ -163,17 +173,17 @@
             <div class="w-max">
               <div
                 class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                <span class="">{{ $item->quantite_stock }}</span>
+                <span class="">{{ $item['quantite'] }}</span>
               </div>
             </div>
           </td>
           <td class="p-4 border-b border-blue-gray-50">
             <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-              {{ $item->categorie->nom }} / {{ $item->brand->nom }}
+              {{ $item['total'] }} 
             </p>
           </td>
           <td class="p-2 w-[100px] border-b border-blue-gray-50 " x-data="{modalIsOpen: false}" >
-            <x-modal.update-prodacts id="{{ $item->id }}" />
+            {{-- <x-modal.update-prodacts id="{{ $item->id }}" /> --}}
             <button @click="modalIsOpen= true"
               class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               type="button">
@@ -199,7 +209,7 @@
           
           </td>
         </tr>
-        @endforeach --}}
+        @endforeach
         
       </tbody>
     </table>

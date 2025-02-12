@@ -57,8 +57,8 @@
           </div>
         </div>
         <div class="p-6 px-0 overflow-scroll">
-          <table class="w-full mt-4 text-left table-auto min-w-max">
-            <thead>
+          <table class="w-full text-left table-auto min-w-max">
+            <thead class="bg-gray-200  ">
               <tr>
                 <th
                   class="p-4 transition-colors cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 hover:bg-blue-gray-50">
