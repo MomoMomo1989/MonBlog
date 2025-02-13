@@ -5,9 +5,9 @@ namespace App\View\Components\modal;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
-use App\Models\produit;
-use App\Models\categorie;
-use App\Models\brand;
+use App\Models\Produit;
+use App\Models\Categorie;
+use App\Models\Brand;
 
 class UpdateProdacts extends Component
 {
@@ -24,12 +24,13 @@ class UpdateProdacts extends Component
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): View|Closure|string
+    public function render()
     {
         $categories = categorie::all();
         $brands = brand::all();
         $produit = produit::where('id',  $this->id )
         ->get()->first();
+
         return view('components.modal.update-prodacts',[
             'produit' => $produit,
             'brands'=>$brands,

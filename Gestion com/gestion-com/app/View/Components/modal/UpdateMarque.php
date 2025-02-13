@@ -14,11 +14,15 @@ class UpdateMarque extends Component
      * Create a new component instance.
      */
     public $id;
+    public $brands;
 
     public function __construct($id)
     {
         //
         $this->id=$id;
+        $this->brands = brand::where('id',  $this->id )
+        ->get()->first();
+        
     }
 
     /**
@@ -26,11 +30,6 @@ class UpdateMarque extends Component
      */
     public function render(): View|Closure|string
     {
-        $brands = brand::where('id',  $this->id )
-        ->get()->first();
-        
-        return view('components.modal.update-marque',[
-            'brands'=>$brands,
-        ]);
+        return view('components.modal.update-marque');
     }
 }
