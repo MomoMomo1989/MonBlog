@@ -39,6 +39,15 @@ Route::middleware([
     // vente
     route::get('vente',[generalController::class,'showVente'])->name('vente.show');
     route::get('store',[VenteListe::class,'StoreVente'])->name('vente.show.Add');
-
+    route::post('storeVente',[VenteListe::class,'Store'])->name('vente.add');
     
+    //Retour en stock
+    route::get('Retour',[generalController::class,'showRetour'])->name('retour.show');
+    route::get('Update-Retour/{id}',[generalController::class,'UpdateRetour'])->name('vente.update');
+    
+    //client 
+    route::get('Client',[generalController::class,'showClient'])->name('client.show');
+    route::get('clients.create',[generalController::class,'clients_create'])->name('clients.create');
+    route::patch('clients.edit/{id}',[generalController::class,'clients_edit'])->name('clients.edit');
+    route::get('clients.destroy/{id}',[generalController::class,'clients_destroy'])->name('clients.destroy');
 });

@@ -8,7 +8,7 @@ class DetailFacture extends Model
 {
     //
     protected $fillable = [
-        'commande_id',
+        'vente_id',
         'produit_id',
         'quantite',
         'prix_unitaire',
@@ -18,7 +18,7 @@ class DetailFacture extends Model
     // Relation avec la commande
     public function vente()
     {
-        return $this->belongsTo(Commande::class, 'vente_id');
+        return $this->belongsTo(vente::class, 'vente_id');
     }
 
     // Relation avec le produit
