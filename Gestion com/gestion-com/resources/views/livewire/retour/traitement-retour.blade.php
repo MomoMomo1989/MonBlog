@@ -11,11 +11,11 @@
               {{ session('message') }}
         </div>
       @endif 
-        {{-- @if($erreur)
+        @if($erreur)
                         <div id="messageErreur" class="mt-4 p-4 bg-red-100 text-red-700 border border-red-300 rounded-md">
                      {{ $erreur }}
                         </div>
-        @endif        --}}
+        @endif       
         <div class="relative mx-4 mt-4  text-gray-700 bg-white rounded-none bg-clip-border">
             <div class="flex items-center justify-between gap-8 mb-8">
               <div>
@@ -187,7 +187,7 @@
                   {{-- <x-modal.update-prodacts id="{{ $item['id'] }}" /> --}}
                   
                   
-                  <button wire:click="productDelete({{ $item['id'] }})"
+                  <button wire:click="productDelete({{ $item['produit']['id'] }})"
                     class="relative h-10 max-h-[40px] w-10 max-w-[40px] select-none rounded-lg text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:bg-gray-900/10 active:bg-gray-900/20 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="submit">
                     <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
@@ -201,7 +201,7 @@
               </tr>
               @endforeach
               @if (!empty($NouveauProduit))
-                  @foreach ($NouveauProduit as $item)
+                  @foreach ($NouveauProduit as $items)
                   <tr>
                     <td class="p-4 border-b border-blue-gray-50">
                       <div class="flex items-center gap-3">
@@ -209,7 +209,7 @@
                           alt="John Michael" class="relative inline-block h-8 w-8  object-cover object-center" />
                         <div class="flex flex-col">
                           <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                            {{ $item['nom'] }}
+                            {{ $items['nom'] }}
                           </p>
                           <p
                             class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900 opacity-70">
@@ -221,7 +221,7 @@
                     <td class="p-4 border-b border-blue-gray-50">
                       <div class="flex flex-col">
                         <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-                          {{ $item['prix_vente'] }}
+                          {{ $items['prix_vente'] }}
                         </p>
                         
                       </div>
@@ -230,7 +230,7 @@
                       <div class="w-max">
                         <div
                           class="relative grid items-center px-2 py-1 font-sans text-xs font-bold text-green-900 uppercase rounded-md select-none whitespace-nowrap bg-green-500/20">
-                          <span class=""> {{ $item['quantite'] }} </span>
+                          <span class=""> {{ $items['quantite'] }} </span>
                         </div>
                       </div>
                     </td>

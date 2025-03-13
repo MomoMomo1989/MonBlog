@@ -17,12 +17,15 @@ class TraitementRetour extends Component
     public $codeBar;
     public $qte;
     public $produit;
-
+    public $erreur;
+    public $idVente;
     public function mount($detailVentes, $vents)
     { 
-        $this->detailventeHis = $this->detailVentes;
+        
         $this->detailVentes = $detailVentes;
         $this->totleTTC = $vents; // Le total initial est basé sur la vente
+        $this->detailventeHis = $this->detailVentes;
+        $this->idVente = $this->detailventeHis[1]['vente_id'];
     }
     public function afficheNewAdd() {
         
@@ -57,51 +60,65 @@ class TraitementRetour extends Component
         $this->qte = 0;
         $this->codeBar = "";
     }
-    public function productDelete($id){
-        $index = array_search($id, array_column($this->detailVentes, 'id'));
-        if ($index !== false){
-            if (isset($this->detailVentes[$index]['sous_total'])) {
-                $this->IDproduitDel[] = $this->detailVentes[$index]['id'];
+    public function productDelete($id)
+    {
+        // dd($id,$this->detailVentes);
+        $index = array_search($id, array_column($this->detailVentes,'produit', 'id'));
+        
+        if ($index !== false) {
+            dd($id,$this->detailVentes);
+            if (!empty($this->detailVentes[$index]['sous_total'])) {
+                // Stocker l'ID du produit supprimé au lieu de l'index
+                $this->IDproduitDel[] = $id;
+    
+                // Mise à jour du total TTC
                 $this->totleTTC -= $this->detailVentes[$index]['sous_total'];
+                
+                // Suppression et réindexation du tableau
                 unset($this->detailVentes[$index]);
+                $this->detailVentes = array_values($this->detailVentes);
+
             }
         }
-        // dd($this->detailVentes);
-        
     }
     public function updateDatabase() {
         DB::beginTransaction();
-        try {
+        try { 
             //  Ajouter les nouveaux produits dans la table `detail_facture` et mettre à jour le stock
             foreach ($this->NouveauProduit as $produit) {
+                
                 DetailFacture::create([
-                    'vente_id' => $this->detailVentes[0]['vente_id'],
+                    'vente_id' => $this->idVente,
                     'produit_id' => $produit['id'],
                     'quantite' => $produit['quantite'],
                     'prix_unitaire' => $produit['prix_vente'],
                     'sous_total' => $produit['sous_total'],
                 ]);
-    
+                
                 //  Réduire le stock du produit
                 $produitDB = Produit::find($produit['id']);
+                
                 if ($produitDB) {
-                    $produitDB->quantite -= $produit['quantite'];
+                    $produitDB->quantite_stock -= $produit['quantite'];
                     $produitDB->save();
                 }
             }
     
             //  Supprimer les produits retournés et réajouter le stock
+            
             foreach ($this->IDproduitDel as $produitId) {
+                dd($this->IDproduitDel);
                 // Récupérer la quantité supprimée
-                $detail = DetailFacture::where('vente_id', $this->detailVentes[0]['vente_id'])
+                $detail = DetailFacture::where('vente_id', $this->idVente)
                                         ->where('produit_id', $produitId)
                                         ->first();
-    
+                                        // dd($this->idVente,$produitId,$detail);
                 if ($detail) {
                     //  Réajouter au stock du produit
                     $produitDB = Produit::find($produitId);
+                    dd($produitDB);
                     if ($produitDB) {
-                        $produitDB->quantite += $detail->quantite;
+                        $produitDB->quantite_stock += $detail->quantite;
                         $produitDB->save();
                     }
     
@@ -111,10 +128,10 @@ class TraitementRetour extends Component
             }
     
             //  Recalculer le total TTC de la vente
-            $totalTTC = DetailFacture::where('vente_id', $this->detailVentes[0]['vente_id'])->sum('sous_total');
+            $totalTTC = DetailFacture::where('vente_id', $this->idVente)->sum('sous_total');
     
             //  Mettre à jour le total dans `vente`
-            Vente::where('id', $this->detailVentes[0]['vente_id'])->update(['prix_total' => $totalTTC]);
+            Vente::where('id', $this->idVente)->update(['prix_total' => $totalTTC]);
     
             DB::commit();
     
@@ -122,7 +139,7 @@ class TraitementRetour extends Component
             $this->NouveauProduit = [];
             $this->IDproduitDel = [];
     
-            session()->flash('message', 'Facture et stock mis à jour avec succès.');
+            session()->flash('success', 'Facture et stock mis à jour avec succès.');
         } catch (\Exception $e) {
             DB::rollback();
             session()->flash('error', 'Erreur lors de la mise à jour : ' . $e->getMessage());
